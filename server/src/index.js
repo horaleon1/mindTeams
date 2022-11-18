@@ -14,9 +14,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.json('welcome');
-});
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.use('/api/clients', clientRoutes);
 app.use('/api/users', usersRoutes);
