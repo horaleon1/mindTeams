@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "mind-teams-challenge-server",
+    "description": "Users and Teams administrator with roles",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3001",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "API for handle authentification"
+    },
+    {
+      "name": "Users",
+      "description": "API for handle CRUD for users operations"
+    },
+    {
+      "name": "Clients",
+      "description": "API for handle CRUD for clients operations"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/auth/sign-in": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "Sign in",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "description": "Fields: email, password"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "x-access-token was generated"
+          },
+          "400": {
+            "description": "User was not found"
+          },
+          "401": {
+            "description": "The password is not correct"
+          }
+        }
+      }
+    },
+    "/auth/sign-up": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "Sign up",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Fields: name, email, password"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "x-access-token was generated"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "description": "Get full list of users",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "List of users"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": ["Users"],
+        "description": "Get user by Id",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Get user by Id"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "description": "Update user by Id",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to update data"
+          },
+          {
+            "name": "Fields",
+            "in": "body",
+            "description": "Send fields that you will update (name, password, roles, englishLevel, technicalKnowledge, linkToCv)"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Updated user"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "description": "Delete user by Id",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to delete data"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Deleted user"
+          }
+        }
+      }
+    },
+    "/clients": {
+      "get": {
+        "tags": ["Clients"],
+        "description": "Get full list of clients",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Get full list of clients"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Clients"],
+        "description": "Create client",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          },
+          {
+            "name": "Fields",
+            "in": "Body",
+            "description": "Required fields to create client (name, account, manager)"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created client"
+          }
+        }
+      }
+    },
+    "/clients/{clientId}": {
+      "get": {
+        "tags": ["Clients"],
+        "description": "Get client by Id",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Get client by Id"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Clients"],
+        "description": "Update client by Id",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          },
+          {
+            "name": "Fields",
+            "in": "body",
+            "description": "Send fields that you want to update (name, account, manager)"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Update client by Id"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Clients"],
+        "description": "Delete client by Id",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "headers",
+            "description": "Protected route, send x-access-token in order to receive data"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Delete client by Id"
+          }
+        }
+      }
+    }
+  }
+}
